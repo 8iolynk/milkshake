@@ -1,41 +1,255 @@
-<!doctype html>
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#090909">
-  <title>Linktree</title>
-  <style>
-    * { box-sizing: border-box; }
-    html, body { min-height: 100%; }
-    body {
-      margin: 0; min-height: 100vh; min-height: 100dvh;
-      display: grid; place-items: center; padding: 24px;
-      background: #090909; color: #fff;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    }
-    main { width: 100%; max-width: 420px; text-align: center; }
-    .link-button {
-      display: flex; align-items: center; justify-content: center;
-      width: 100%; min-height: 56px; padding: 16px 22px;
-      border: 0; border-radius: 14px; background: #ff4fa3; color: #170811;
-      font-size: 16px; font-weight: 700; line-height: 1.3;
-      text-decoration: none; overflow-wrap: anywhere;
-      -webkit-tap-highlight-color: transparent;
-      transition: background-color .15s ease, transform .15s ease;
-    }
-    .link-button:hover { background: #ff75b7; }
-    .link-button:active { transform: scale(.985); }
-    .link-button:focus-visible { outline: 3px solid #fff; outline-offset: 4px; }
-    @media (prefers-reduced-motion: reduce) { .link-button { transition: none; } }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>My Page</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  font-family: Arial, sans-serif;
+  background: #101014;
+  color: #fff;
+}
+
+main {
+  width: 100%;
+  max-width: 420px;
+  padding: 28px 22px;
+  text-align: center;
+  background: #191920;
+  border: 1px solid #34343d;
+  border-radius: 18px;
+}
+
+h2 {
+  font-size: 23px;
+  margin-top: 0;
+}
+
+p {
+  color: #d1d1d8;
+  line-height: 1.6;
+}
+
+.link-button,
+button {
+  display: inline-block;
+  width: 100%;
+  margin-top: 12px;
+  padding: 15px;
+  border: 0;
+  border-radius: 12px;
+  background: #ff4fa0;
+  color: #171018;
+  font-size: 16px;
+  font-weight: bold;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.goog-te-banner-frame,
+.goog-te-gadget,
+.goog-te-balloon-frame {
+  display: none !important;
+}
+
+body {
+  top: 0 !important;
+}
+</style>
 </head>
+
 <body>
-  <main>
-    <!-- GANTI HANYA URL DI DALAM TANDA KUTIP href="..." -->
-    <a class="link-button" href="https://byuxyz8.github.io/mypage/" target="_blank" rel="noopener noreferrer">Click🍑here💦</a>
-  </main>
+<main>
+
+<section id="checking" class="hidden">
+  <h2 id="checking-title">Checking availability</h2>
+  <p id="checking-text">Please wait a moment.</p>
+</section>
+
+<section id="indonesia" class="hidden">
+  <h2 id="id-title">
+    Sorry, this link is not available in your country.
+  </h2>
+</section>
+
+<section id="international">
+  <h2 id="destination-title">Are you over 18?</h2>
+  <p id="destination-text">
+    Get to know the real me! Find my personal photos, videos, and contact info—all in one place, completely free. 💕
+  </p>
+  <a class="link-button"
+     id="destination-link"
+     href="https://byuxyz8.github.io/mypage/"
+     target="_blank"
+     rel="noopener noreferrer">
+    👉🏻 Check Out My Page 🍑💦
+  </a>
+</section>
+
+<section id="error" class="hidden">
+  <h2 id="error-title">Region unavailable</h2>
+  <p id="error-text">
+    We couldn't verify your region. Please try again later.
+  </p>
+  <button id="retry-button" onclick="location.reload()">
+    Try again
+  </button>
+</section>
+
+<div id="google_translate_element" class="hidden"></div>
+
+</main>
+
+<script>
+(function () {
+  "use strict";
+
+  function show(id) {
+    document.getElementById("indonesia").classList.add("hidden");
+    document.getElementById("international").classList.add("hidden");
+    document.getElementById("error").classList.add("hidden");
+    document.getElementById(id).classList.remove("hidden");
+  }
+
+  function setLanguage(lang) {
+    document.documentElement.lang = lang;
+
+    var t = {
+      id: {
+        title: "My Page",
+        unavailable: "Maaf, tautan ini tidak tersedia di negara Anda.",
+        continue: "Apakah Anda berusia di atas 18 tahun?",
+        description: "Kenali saya lebih dekat! Foto pribadi, video, dan kontak saya ada di satu tempat—semuanya gratis. 💕",
+        open: "👉🏻 Lihat Halaman Saya 🍑💦"
+      },
+      en: {
+        title: "My Page",
+        unavailable: "Sorry, this link is not available in your country.",
+        continue: "Are you over 18?",
+        description: "Get to know the real me! Find my personal photos, videos, and contact info—all in one place, completely free. 💕",
+        open: "👉🏻 Check Out My Page 🍑💦"
+      }
+    };
+
+    var x = t[lang] || t.en;
+    document.title = x.title;
+    document.getElementById("id-title").textContent = x.unavailable;
+    document.getElementById("destination-title").textContent = x.continue;
+    document.getElementById("destination-text").textContent = x.description;
+    document.getElementById("destination-link").textContent = x.open;
+  }
+
+  function translatePage() {
+    if (window.google && google.translate) {
+      new google.translate.TranslateElement({
+        pageLanguage: "en",
+        autoDisplay: false
+      }, "google_translate_element");
+    }
+  }
+
+  window.googleTranslateElementInit = translatePage;
+
+  fetch("https://ipapi.co/json/", { cache: "no-store" })
+    .then(function (response) {
+      if (!response.ok) throw new Error("Location lookup failed");
+      return response.json();
+    })
+    .then(function (data) {
+      if (!data || !data.country_code) {
+        throw new Error("Country unavailable");
+      }
+
+      if (data.country_code === "ID") {
+        setLanguage("id");
+        show("indonesia");
+        return;
+      }
+
+      setLanguage("en");
+      show("international");
+
+      var browserLang =
+        (navigator.languages && navigator.languages[0]) ||
+        navigator.language ||
+        "en";
+
+      browserLang = browserLang.split("-")[0].toLowerCase();
+
+      if (browserLang !== "en") {
+        var script = document.createElement("script");
+        script.src =
+          "https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
+        document.head.appendChild(script);
+
+        var attempts = 0;
+        var timer = setInterval(function () {
+          attempts++;
+          var select = document.querySelector(".goog-te-combo");
+
+          if (select) {
+            clearInterval(timer);
+            select.value = browserLang;
+            select.dispatchEvent(new Event("change"));
+          }
+
+          if (attempts >= 20) clearInterval(timer);
+        }, 500);
+      }
+    })
+    .catch(function () {
+      setLanguage("en");
+      show("international");
+    });
+})();
+</script>
+
 </body>
 </html>
+or = function () {};
+        document.head.appendChild(script);
 
-      
+        var attempts = 0;
+        var timer = setInterval(function () {
+          attempts++;
+          var select = document.querySelector(".goog-te-combo");
+
+          if (select) {
+            clearInterval(timer);
+            select.value = browserLang;
+            select.dispatchEvent(new Event("change"));
+          }
+
+          if (attempts >= 20) clearInterval(timer);
+        }, 500);
+      }
+    })
+    .catch(function () {
+      setLanguage("en");
+      show("error");
+    });
+})();
+</script>
+
+</body>
+  </html>
+    
