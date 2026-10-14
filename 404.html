@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -80,11 +79,6 @@ body {
 <body>
 <main>
 
-<section id="checking" class="hidden">
-  <h2 id="checking-title">Checking availability</h2>
-  <p id="checking-text">Please wait a moment.</p>
-</section>
-
 <section id="indonesia" class="hidden">
   <h2 id="id-title">
     Sorry, this link is not available in your country.
@@ -105,16 +99,6 @@ body {
   </a>
 </section>
 
-<section id="error" class="hidden">
-  <h2 id="error-title">Region unavailable</h2>
-  <p id="error-text">
-    We couldn't verify your region. Please try again later.
-  </p>
-  <button id="retry-button" onclick="location.reload()">
-    Try again
-  </button>
-</section>
-
 <div id="google_translate_element" class="hidden"></div>
 
 </main>
@@ -126,7 +110,6 @@ body {
   function show(id) {
     document.getElementById("indonesia").classList.add("hidden");
     document.getElementById("international").classList.add("hidden");
-    document.getElementById("error").classList.add("hidden");
     document.getElementById(id).classList.remove("hidden");
   }
 
@@ -169,6 +152,30 @@ body {
 
   window.googleTranslateElementInit = translatePage;
 
+  function loadGoogleTranslate(browserLang) {
+    if (browserLang === "en") return;
+
+    var script = document.createElement("script");
+    script.src =
+      "https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
+    script.onerror = function () {};
+    document.head.appendChild(script);
+
+    var attempts = 0;
+    var timer = setInterval(function () {
+      attempts++;
+      var select = document.querySelector(".goog-te-combo");
+
+      if (select) {
+        clearInterval(timer);
+        select.value = browserLang;
+        select.dispatchEvent(new Event("change"));
+      }
+
+      if (attempts >= 20) clearInterval(timer);
+    }, 500);
+  }
+
   fetch("https://ipapi.co/json/", { cache: "no-store" })
     .then(function (response) {
       if (!response.ok) throw new Error("Location lookup failed");
@@ -194,27 +201,7 @@ body {
         "en";
 
       browserLang = browserLang.split("-")[0].toLowerCase();
-
-      if (browserLang !== "en") {
-        var script = document.createElement("script");
-        script.src =
-          "https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
-        document.head.appendChild(script);
-
-        var attempts = 0;
-        var timer = setInterval(function () {
-          attempts++;
-          var select = document.querySelector(".goog-te-combo");
-
-          if (select) {
-            clearInterval(timer);
-            select.value = browserLang;
-            select.dispatchEvent(new Event("change"));
-          }
-
-          if (attempts >= 20) clearInterval(timer);
-        }, 500);
-      }
+      loadGoogleTranslate(browserLang);
     })
     .catch(function () {
       setLanguage("en");
@@ -225,31 +212,3 @@ body {
 
 </body>
 </html>
-or = function () {};
-        document.head.appendChild(script);
-
-        var attempts = 0;
-        var timer = setInterval(function () {
-          attempts++;
-          var select = document.querySelector(".goog-te-combo");
-
-          if (select) {
-            clearInterval(timer);
-            select.value = browserLang;
-            select.dispatchEvent(new Event("change"));
-          }
-
-          if (attempts >= 20) clearInterval(timer);
-        }, 500);
-      }
-    })
-    .catch(function () {
-      setLanguage("en");
-      show("error");
-    });
-})();
-</script>
-
-</body>
-  </html>
-    
