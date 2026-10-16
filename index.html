@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
 <meta name="referrer" content="strict-origin-when-cross-origin">
-<title>My Page</title>
+<title>My🔥Page</title>
 
 <style>
 * {
@@ -80,12 +80,9 @@ body {
 <main>
 
 <section id="indonesia" class="hidden">
-  <h2 id="id-title">
-    Sorry, this link is not available in your country.
-  </h2>
 </section>
 
-<section id="international">
+<section id="international" class="hidden">
   <h2 id="destination-title">Are you over 18?</h2>
   <p id="destination-text">
     Get to know the real me! Find my personal photos, videos, and contact info—all in one place, completely free. 💕
@@ -110,6 +107,17 @@ body {
   function show(id) {
     document.getElementById("indonesia").classList.add("hidden");
     document.getElementById("international").classList.add("hidden");
+
+    if (id === "indonesia") {
+      document.body.style.background = "#000";
+      document.body.style.padding = "0";
+      document.querySelector("main").style.display = "none";
+      return;
+    }
+
+    document.body.style.background = "#101014";
+    document.body.style.padding = "24px";
+    document.querySelector("main").style.display = "block";
     document.getElementById(id).classList.remove("hidden");
   }
 
@@ -117,16 +125,8 @@ body {
     document.documentElement.lang = lang;
 
     var t = {
-      id: {
-        title: "My Page",
-        unavailable: "Maaf, tautan ini tidak tersedia di negara Anda.",
-        continue: "Apakah Anda berusia di atas 18 tahun?",
-        description: "Kenali saya lebih dekat! Foto pribadi, video, dan kontak saya ada di satu tempat—semuanya gratis. 💕",
-        open: "👉🏻 Lihat Halaman Saya 🍑💦"
-      },
       en: {
         title: "My Page",
-        unavailable: "Sorry, this link is not available in your country.",
         continue: "Are you over 18?",
         description: "Get to know the real me! Find my personal photos, videos, and contact info—all in one place, completely free. 💕",
         open: "👉🏻 Check Out My Page 🍑💦"
@@ -135,7 +135,6 @@ body {
 
     var x = t[lang] || t.en;
     document.title = x.title;
-    document.getElementById("id-title").textContent = x.unavailable;
     document.getElementById("destination-title").textContent = x.continue;
     document.getElementById("destination-text").textContent = x.description;
     document.getElementById("destination-link").textContent = x.open;
@@ -187,7 +186,6 @@ body {
       }
 
       if (data.country_code === "ID") {
-        setLanguage("id");
         show("indonesia");
         return;
       }
@@ -212,52 +210,3 @@ body {
 
 </body>
 </html>
-ect = document.querySelector(".goog-te-combo");
-
-          if (select) {
-            clearInterval(timer);
-            select.value = browserLang;
-            select.dispatchEvent(new Event("change"));
-          }
-
-          if (attempts >= 20) clearInterval(timer);
-        }, 500);
-      }
-    })
-    .catch(function () {
-      setLanguage("en");
-      show("international");
-    });
-})();
-</script>
-
-</body>
-</html>
-or = function () {};
-        document.head.appendChild(script);
-
-        var attempts = 0;
-        var timer = setInterval(function () {
-          attempts++;
-          var select = document.querySelector(".goog-te-combo");
-
-          if (select) {
-            clearInterval(timer);
-            select.value = browserLang;
-            select.dispatchEvent(new Event("change"));
-          }
-
-          if (attempts >= 20) clearInterval(timer);
-        }, 500);
-      }
-    })
-    .catch(function () {
-      setLanguage("en");
-      show("error");
-    });
-})();
-</script>
-
-</body>
-  </html>
-  
