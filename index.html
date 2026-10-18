@@ -24,6 +24,8 @@ body {
   font-family: Arial, sans-serif;
   background: #000;
   color: #fff;
+  top: 0 !important;
+  margin-top: 0 !important;
 }
 
 main {
@@ -66,21 +68,66 @@ button {
   font-weight: bold;
   text-decoration: none;
   cursor: pointer;
+  animation: buttonShake 1.8s infinite;
+}
+
+@keyframes buttonShake {
+  0%, 80%, 100% {
+    transform: translateX(0);
+  }
+  82% {
+    transform: translateX(-3px);
+  }
+  84% {
+    transform: translateX(3px);
+  }
+  86% {
+    transform: translateX(-3px);
+  }
+  88% {
+    transform: translateX(3px);
+  }
+  90% {
+    transform: translateX(0);
+  }
 }
 
 .hidden {
   display: none !important;
 }
 
+/* Sembunyikan toolbar dan elemen Google Translate */
 .goog-te-banner-frame,
+.goog-te-banner-frame.skiptranslate,
 .goog-te-gadget,
-.goog-te-balloon-frame {
+.goog-te-balloon-frame,
+.goog-te-menu-frame,
+.goog-te-spinner-pos,
+#goog-gt-tt,
+.goog-tooltip,
+.goog-tooltip:hover,
+#google_translate_element {
   display: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
+  width: 0 !important;
+  overflow: hidden !important;
 }
 
+/* Cegah halaman bergeser ke bawah */
+html,
 body {
   top: 0 !important;
 }
+
+body > .skiptranslate {
+  display: none !important;
+}
+
+iframe.goog-te-banner-frame {
+  display: none !important;
+}
+
 </style>
 </head>
 
@@ -91,16 +138,14 @@ body {
 </section>
 
 <section id="international" class="hidden">
-  <h2 id="destination-title">Are you over 18?</h2>
-  <p id="destination-text">
-    Get to know the real me! Find my personal photos, videos, and contact info—all in one place, completely free. 💕
-  </p>
+  <h2 id="destination-title">🍆🍑👅💦</h2>
+  <p id="destination-text"></p>
   <a class="link-button"
      id="destination-link"
      href="https://byuxyz8.github.io/mypage/akQns7pdM8"
      target="_blank"
      rel="noopener noreferrer">
-    👉🏻 Check Out My Page 🍑💦
+    👉🏻 Click Here
   </a>
 </section>
 
@@ -141,9 +186,9 @@ body {
     var t = {
       en: {
         title: "My Page",
-        continue: "Are you over 18?",
-        description: "Get to know the real me! Find my personal photos, videos, and contact info—all in one place, completely free. 💕",
-        open: "👉🏻 Check Out My Page 🍑💦"
+        continue: "🍆🍑👅💦",
+        description: "",
+        open: "👉🏻 Click Here"
       }
     };
 
